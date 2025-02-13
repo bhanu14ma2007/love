@@ -23,8 +23,8 @@
             font-size: 2.5rem;
             color: #d63384;
             opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 1s ease, transform 1s ease;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 1s ease-in;
             font-weight: bold;
         }
         .reveal-button {
@@ -41,63 +41,22 @@
             background: #e91e63;
             transform: scale(1.1);
         }
-          .card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            padding: 20px;
-            text-align: center;
-            max-width: 300px;
-            animation: float 5s ease-in-out infinite;
-        }
         .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        .fade-in.show {
             opacity: 1;
             transform: translateY(0);
         }
         @keyframes floating-hearts {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
-        }
-         .message {
-            margin-top: 20px;
-            font-size: 1.2em;
-            animation: fadeIn 3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        .floating-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .floating-hearts div {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background: #ff004f;
-            opacity: 0.7;
-            clip-path: path('M23.5 2.1C21.5 0.1 18.2-0.4 15.5 2.3L15 2.8L14.5 2.3C11.8-0.4 8.5 0.1 6.5 2.1C4.1 4.5 3.6 8.1 5.4 11.2C7.1 14.2 12.4 19.2 14.3 20.8C14.5 21 14.8 21 15 21C15.2 21 15.5 21 15.7 20.8C17.6 19.2 22.9 14.2 24.6 11.2C26.4 8.1 25.9 4.5 23.5 2.1Z');
-            animation: floatUp 6s infinite;
-        }
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
         }
         .heart {
             position: absolute;
@@ -113,37 +72,26 @@
 <body>
     <div class="container">
         <button class="reveal-button" onclick="revealLove()">Click Me 💖</button>
-        <div class="hidden-message" id="message">I LOVE YOU 💕<br>HAPPY VALENTINE'S DAY ❤️</div>
-         <h1>❤️ LOVE IS NOT A BOND BETWEEN A BOY AND A GIRL, BUT A BEAUTIFUL FRIENDSHIP TOO! ❤️<br>I LOVE YOU RAA BAVA..❤️❤️❤️</h1>
-    <div class="card">
-        <div class="heart">&#10084;</div>
-        <div class="message">
-           Karthik ❤️ Chari
+        <div class="hidden-content">
+            <div class="hidden-message fade-in" id="line1">I LOVE YOU 💕</div>
+            <div class="hidden-message fade-in" id="line2">HAPPY VALENTINE'S DAY ❤️</div>
+            <h1 class="fade-in" id="line3">❤️ LOVE IS NOT A BOND BETWEEN A BOY AND A GIRL, BUT A BEAUTIFUL FRIENDSHIP TOO! ❤️</h1>
+            <h1 class="fade-in" id="line4">I LOVE YOU RAA BAVA..❤️❤️❤️</h1>
+            <div class="card fade-in" id="line5">
+                <div class="heart">&#10084;</div>
+                <div class="message">Karthik ❤️ Chari</div>
+            </div>
         </div>
-    </div>
-    <div class="floating-hearts">
-        <div style="left: 10%; animation-delay: 0s;"></div>
-        <div style="left: 20%; animation-delay: 2s;"></div>
-        <div style="left: 30%; animation-delay: 4s;"></div>
-        <div style="left: 50%; animation-delay: 6s;"></div>
-        <div style="left: 70%; animation-delay: 8s;"></div>
-        <div style="left: 80%; animation-delay: 10s;"></div>
-    </div>
     </div>
     
     <script>
         function revealLove() {
-            document.getElementById('message').classList.add('show');
+            setTimeout(() => document.getElementById('line1').classList.add('show'), 500);
+            setTimeout(() => document.getElementById('line2').classList.add('show'), 1000);
+            setTimeout(() => document.getElementById('line3').classList.add('show'), 1500);
+            setTimeout(() => document.getElementById('line4').classList.add('show'), 2000);
+            setTimeout(() => document.getElementById('line5').classList.add('show'), 2500);
         }
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            document.body.appendChild(heart);
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 4 + 2) + 's';
-            setTimeout(() => heart.remove(), 6000);
-        }
-        setInterval(createHeart, 250);
     </script>
 </body>
 </html>
